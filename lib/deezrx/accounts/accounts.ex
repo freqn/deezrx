@@ -9,6 +9,7 @@ defmodule Deezrx.Accounts do
   alias Deezrx.Accounts.Courier
   alias Deezrx.Accounts.Pharmacy
   alias Deezrx.Accounts.Order
+  alias Deezrx.Accounts.User
 
   def list_couriers do
     Repo.all(Courier)

@@ -1,7 +1,6 @@
 defmodule DeezrxWeb.SessionController do
   use DeezrxWeb, :controller
   alias Deezrx.Accounts
-  # alias DeezrxWeb.Plugs.CurrentUser
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -11,8 +10,7 @@ defmodule DeezrxWeb.SessionController do
     case Accounts.authenticate_user(email, password) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Welcome to Storex")
-        # |> CurrentUser.set(user)
+        |> put_flash(:info, "Welcome to Deezrx")
         |> redirect(to: order_path(conn, :index))
 
       {:error, _} ->
@@ -20,11 +18,5 @@ defmodule DeezrxWeb.SessionController do
         |> put_flash(:error, "Unable to sign in")
         |> render("new.html")
     end
-  end
-
-  def delete(conn, _) do
-    conn
-    |> CurrentUser.forget()
-    |> redirect(to: order_path(conn, :index))
   end
 end
