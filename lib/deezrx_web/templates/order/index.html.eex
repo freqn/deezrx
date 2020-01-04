@@ -1,0 +1,12 @@
+<section>
+  <ul class="grid">
+    <h2>Orders</h2>
+    <%= for order <- @orders do %>
+      <li>
+        <div>
+         <h3><%= "Order ##{order.id} #{order.patient_first_name} #{order.patient_last_name}"%></h2>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</section>

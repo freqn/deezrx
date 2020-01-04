@@ -4,32 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Hello Deezrx!</title>
+    <title>Welcome to DeezRX</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+    <nav class="main-nav">
+      <a class="main-nav__logo" href="/">Deez<span style="color:orange">Rx</span></a>
+    </nav>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <main class="content">
+      <%= if message=get_flash(@conn, :info) do %>
+        <p class="alert alert-info" role="alert"><%= message %></p>
+      <% end %>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <%= if message=get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert"><%= message %></p>
+      <% end %>
 
-    </div> <!-- /container -->
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

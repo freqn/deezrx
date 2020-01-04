@@ -21,7 +21,7 @@ defmodule Seed do
     Repo.delete_all(Pharmacy)
     Repo.query("ALTER SEQUENCE pharmacies_id_seq RESTART")
     Repo.query("ALTER SEQUENCE couriers_id_seq RESTART")
-    Repo.query("ALTER SEQUENCE pharmacy_orders_id_seq RESTART")
+    Repo.query("ALTER SEQUENCE orders_id_seq RESTART")
   end
 
   def seed_couriers() do
@@ -68,7 +68,7 @@ defmodule Seed do
       patient_first_name: "Carl",
       patient_last_name: "Weathers",
       patient_address: "60 Main, Testville, OH, 45632",
-      pickup_date: ~D[2020-01-04],
+      pickup_date: Date.utc_today(),
       pickup_time: ~T[19:39:31.056226],
       pharmacy_id: pharmacy1.id
     })
@@ -86,7 +86,7 @@ defmodule Seed do
       patient_first_name: "Sarah",
       patient_last_name: "Rodriquez",
       patient_address: "3 Innovation Blvd, Lebanon, OH, 45236",
-      pickup_date: ~D[2020-01-19],
+      pickup_date: Date.utc_today(),
       pickup_time: ~T[09:39:31.056226],
       pharmacy_id: pharmacy2.id
     })
@@ -95,7 +95,7 @@ defmodule Seed do
       patient_first_name: "Pablo",
       patient_last_name: "Escobar",
       patient_address: "666 South Ave, Bogota, KY, 43256",
-      pickup_date: ~D[2020-01-15],
+      pickup_date: Date.utc_today(),
       pickup_time: ~T[19:39:31.056226],
       pharmacy_id: pharmacy3.id
     })
