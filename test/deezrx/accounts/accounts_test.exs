@@ -3,65 +3,73 @@ defmodule Deezrx.AccountsTest do
 
   alias Deezrx.Accounts
 
-  describe "couriers" do
-    alias Deezrx.Accounts.Courier
+  @valid_attrs %{
+    email: "john.doe@test.tld",
+    password: "123456"
+  }
 
-    @valid_attrs %{address: "some address", name: "some name"}
-    @update_attrs %{address: "some updated address", name: "some updated name"}
-    @invalid_attrs %{address: nil, name: nil}
+  def user_fixture(attrs \\ %{}) do
+    {:ok, user} =
+      attrs
+      |> Enum.into(@valid_attrs)
+      |> Accounts.create_user()
 
-    def courier_fixture(attrs \\ %{}) do
-      {:ok, courier} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Accounts.create_courier()
+    user
+  end
 
-      courier
+  describe "accounts_users" do
+    alias Accounts.User
+
+    test "create_user/1 creates a user when data is valid" do
+      assert {:ok, user} = Accounts.create_user(@valid_attrs)
     end
 
-    test "list_couriers/0 returns all couriers" do
-      courier = courier_fixture()
-      assert Accounts.list_couriers() == [courier]
+    test "create_user/1 does not create a user when data is invalid" do
+      existing = user_fixture()
+      {:error, changeset} = Accounts.create_user(%{})
+
+      assert "can't be blank" in errors_on(changeset).email
+      assert "can't be blank" in errors_on(changeset).password
+
+      {:error, changeset} = Accounts.create_user(%{password: "123"})
+      assert "should be at least 6 character(s)" in errors_on(changeset).password
+
+      duplicated_email_attrs = %{@valid_attrs | email: existing.email}
+      {:error, changeset} = Accounts.create_user(duplicated_email_attrs)
+
+      assert "has already been taken" in errors_on(changeset).email
     end
 
-    test "get_courier!/1 returns the courier with given id" do
-      courier = courier_fixture()
-      assert Accounts.get_courier!(courier.id) == courier
+    test "get_user!/1 returns a user" do
+      fixture = user_fixture()
+      user = Accounts.get_user!(fixture.id)
+
+      assert user.id == fixture.id
     end
 
-    test "create_courier/1 with valid data creates a courier" do
-      assert {:ok, %Courier{} = courier} = Accounts.create_courier(@valid_attrs)
-      assert courier.address == "some address"
-      assert courier.name == "some name"
+    test "new_user/0 returns an empty changeset" do
+      assert %Ecto.Changeset{} = Accounts.new_user()
     end
 
-    test "create_courier/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Accounts.create_courier(@invalid_attrs)
+    test "authenticate_user/2 returns a user when email and password match" do
+      user_fixture()
+
+      assert {:ok, %User{}} =
+               Accounts.authenticate_user(@valid_attrs.email, @valid_attrs.password)
     end
 
-    test "update_courier/2 with valid data updates the courier" do
-      courier = courier_fixture()
-      assert {:ok, courier} = Accounts.update_courier(courier, @update_attrs)
-      assert %Courier{} = courier
-      assert courier.address == "some updated address"
-      assert courier.name == "some updated name"
+    test "authenticate_user/2 returns an error when email is not found" do
+      user_fixture()
+
+      assert {:error, "invalid password"} =
+               Accounts.authenticate_user(@valid_attrs.email, "invalid")
     end
 
-    test "update_courier/2 with invalid data returns error changeset" do
-      courier = courier_fixture()
-      assert {:error, %Ecto.Changeset{}} = Accounts.update_courier(courier, @invalid_attrs)
-      assert courier == Accounts.get_courier!(courier.id)
-    end
+    test "authenticate_user/2 returns an error when password doesn't match" do
+      user_fixture()
 
-    test "delete_courier/1 deletes the courier" do
-      courier = courier_fixture()
-      assert {:ok, %Courier{}} = Accounts.delete_courier(courier)
-      assert_raise Ecto.NoResultsError, fn -> Accounts.get_courier!(courier.id) end
-    end
-
-    test "change_courier/1 returns a courier changeset" do
-      courier = courier_fixture()
-      assert %Ecto.Changeset{} = Accounts.change_courier(courier)
+      assert {:error, "invalid password"} =
+               Accounts.authenticate_user(@valid_attrs.email, "invalid")
     end
   end
 end

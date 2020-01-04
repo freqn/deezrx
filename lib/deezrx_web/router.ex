@@ -2,21 +2,23 @@ defmodule DeezrxWeb.Router do
   use DeezrxWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_flash)
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", DeezrxWeb do
-    pipe_through :browser # Use the default browser stack
+    # Use the default browser stack
+    pipe_through(:browser)
 
-    get "/", PageController, :index
+    get("/", OrderController, :index)
+    resources("/sessions", SessionController, only: [:new, :create], singleton: true)
   end
 
   # Other scopes may use custom stacks.
