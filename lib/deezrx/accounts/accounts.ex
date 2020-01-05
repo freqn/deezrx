@@ -1,8 +1,8 @@
 defmodule Deezrx.Accounts do
   import Ecto.Query, warn: false
-  alias Deezrx.Repo
+  alias Deezrx.{Repo, Accounts}
 
-  alias Deezrx.Accounts.{
+  alias Accounts.{
     Courier,
     Pharmacy,
     Order,
