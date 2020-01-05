@@ -6,7 +6,7 @@ defmodule Deezrx.Accounts.User do
     field(:email, :string)
     field(:is_courier, :boolean, default: false)
     field(:is_pharmacy, :boolean, default: false)
-    field(:org_id, :string)
+    field(:org_id, :integer)
     field(:password_hash, :string)
     field(:password, :string, virtual: true)
 

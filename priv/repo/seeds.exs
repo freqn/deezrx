@@ -14,14 +14,17 @@ defmodule Seed do
   alias Deezrx.Accounts.Courier
   alias Deezrx.Accounts.Pharmacy
   alias Deezrx.Accounts.Order
+  alias Deezrx.Accounts.User
 
   def clean() do
     Repo.delete_all(Order)
     Repo.delete_all(Courier)
     Repo.delete_all(Pharmacy)
+    Repo.delete_all(User)
     Repo.query("ALTER SEQUENCE pharmacies_id_seq RESTART")
     Repo.query("ALTER SEQUENCE couriers_id_seq RESTART")
     Repo.query("ALTER SEQUENCE orders_id_seq RESTART")
+    Repo.query("ALTER SEQUENCE users_id_seq RESTART")
   end
 
   def seed_couriers() do
@@ -100,9 +103,55 @@ defmodule Seed do
       pharmacy_id: pharmacy3.id
     })
   end
+
+  def seed_users() do
+    pharmacy1 = Repo.get_by!(Pharmacy, name: "BetterRx")
+    pharmacy2 = Repo.get_by!(Pharmacy, name: "BestRx")
+    pharmacy3 = Repo.get_by!(Pharmacy, name: "Drugs R Us")
+
+    courier1 = Repo.get_by!(Courier, name: "Same Day Delivery")
+    courier2 = Repo.get_by!(Courier, name: "Previous Day Delivery")
+    require String
+
+    Repo.insert!(%User{
+      email: "betterrx@test.com",
+      password: "password123",
+      org_id: pharmacy1.id,
+      is_pharmacy: true
+    })
+
+    Repo.insert!(%User{
+      email: "bestrx@test.com",
+      password: "password123",
+      org_id: pharmacy2.id,
+      is_pharmacy: true
+    })
+
+    Repo.insert!(%User{
+      email: "drugsrus@test.com",
+      password: "password123",
+      org_id: pharmacy3.id,
+      is_pharmacy: true
+    })
+
+    Repo.insert!(%User{
+      email: "sameday@test.com",
+      password: "password123",
+      org_id: courier1.id,
+      is_courier: true
+    })
+
+    Repo.insert!(%User{
+      email: "previousday@test.com",
+      password: "password123",
+      org_id: courier2.id,
+      is_courier: true
+    })
+  end
 end
 
 Seed.clean()
 Seed.seed_couriers()
 Seed.seed_pharmacies()
 Seed.seed_orders()
+Seed.seed_users()
