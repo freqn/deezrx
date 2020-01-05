@@ -1,20 +1,19 @@
 defmodule Deezrx.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Deezrx.Accounts.User
 
   schema "users" do
     field(:email, :string)
-    field(:is_courier, :boolean, default: false)
-    field(:is_pharmacy, :boolean, default: false)
-    field(:org_id, :integer)
     field(:password_hash, :string)
+    field(:org_id, :integer)
+    field(:is_pharmacy, :boolean)
+    field(:is_courier, :boolean)
     field(:password, :string, virtual: true)
-
     timestamps()
   end
 
-  @doc false
-  def changeset(user, attrs) do
+  def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:email, :password, :org_id, :is_pharmacy, :is_courier])
     |> validate_required([:email, :password])
