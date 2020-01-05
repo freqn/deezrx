@@ -10,13 +10,24 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 defmodule Seed do
-  alias Deezrx.Repo
-  alias Deezrx.Accounts.Courier
-  alias Deezrx.Accounts.Pharmacy
-  alias Deezrx.Accounts.Order
-  alias Deezrx.Accounts.User
+  alias Deezrx.{
+    Repo,
+    Accounts,
+    Accounts.Courier,
+    Accounts.Pharmacy,
+    Accounts.Order,
+    Accounts.User
+  }
 
-  def clean() do
+  def generate() do
+    clean()
+    seed_couriers()
+    seed_pharmacies()
+    seed_orders()
+    seed_users()
+  end
+
+  defp clean() do
     Repo.delete_all(Order)
     Repo.delete_all(Courier)
     Repo.delete_all(Pharmacy)
@@ -27,7 +38,7 @@ defmodule Seed do
     Repo.query("ALTER SEQUENCE users_id_seq RESTART")
   end
 
-  def seed_couriers() do
+  defp seed_couriers() do
     Repo.insert!(%Courier{
       name: "Same Day Delivery",
       address: "900 Trenton Lane, Trenton, NJ 08536"
@@ -39,7 +50,7 @@ defmodule Seed do
     })
   end
 
-  def seed_pharmacies() do
+  defp seed_pharmacies() do
     courier1 = Repo.get_by!(Courier, name: "Same Day Delivery")
     courier2 = Repo.get_by!(Courier, name: "Previous Day Delivery")
 
@@ -62,7 +73,7 @@ defmodule Seed do
     })
   end
 
-  def seed_orders() do
+  defp seed_orders() do
     pharmacy1 = Repo.get_by!(Pharmacy, name: "BetterRx")
     pharmacy2 = Repo.get_by!(Pharmacy, name: "BestRx")
     pharmacy3 = Repo.get_by!(Pharmacy, name: "Drugs R Us")
@@ -104,54 +115,59 @@ defmodule Seed do
     })
   end
 
-  def seed_users() do
+  defp seed_users() do
+    password = "password123"
     pharmacy1 = Repo.get_by!(Pharmacy, name: "BetterRx")
     pharmacy2 = Repo.get_by!(Pharmacy, name: "BestRx")
     pharmacy3 = Repo.get_by!(Pharmacy, name: "Drugs R Us")
-
     courier1 = Repo.get_by!(Courier, name: "Same Day Delivery")
     courier2 = Repo.get_by!(Courier, name: "Previous Day Delivery")
-    require String
 
-    Repo.insert!(%User{
+    p1 = %{
       email: "betterrx@test.com",
-      password: "password123",
+      password: password,
       org_id: pharmacy1.id,
       is_pharmacy: true
-    })
+    }
 
-    Repo.insert!(%User{
+    p2 = %{
       email: "bestrx@test.com",
-      password: "password123",
+      password: password,
       org_id: pharmacy2.id,
       is_pharmacy: true
-    })
+    }
 
-    Repo.insert!(%User{
+    p3 = %{
       email: "drugsrus@test.com",
-      password: "password123",
+      password: password,
       org_id: pharmacy3.id,
       is_pharmacy: true
-    })
+    }
 
-    Repo.insert!(%User{
+    c1 = %{
       email: "sameday@test.com",
-      password: "password123",
+      password: password,
       org_id: courier1.id,
       is_courier: true
-    })
+    }
 
-    Repo.insert!(%User{
+    c2 = %{
       email: "previousday@test.com",
-      password: "password123",
+      password: password,
       org_id: courier2.id,
       is_courier: true
-    })
+    }
+
+    gen_user(p1)
+    gen_user(p2)
+    gen_user(p3)
+    gen_user(c1)
+    gen_user(c2)
+  end
+
+  defp gen_user(attrs) do
+    Accounts.create_user(attrs)
   end
 end
 
-Seed.clean()
-Seed.seed_couriers()
-Seed.seed_pharmacies()
-Seed.seed_orders()
-Seed.seed_users()
+Seed.generate()
