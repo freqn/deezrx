@@ -139,46 +139,46 @@ defmodule Seed do
     courier1 = Repo.get_by!(Courier, name: "Same Day Delivery")
     courier2 = Repo.get_by!(Courier, name: "Previous Day Delivery")
 
-    p1 = %{
+    u1 = %{
       email: "betterrx@test.com",
       password: password,
       org_id: pharmacy1.id,
       is_pharmacy: true
     }
 
-    p2 = %{
+    u2 = %{
       email: "bestrx@test.com",
       password: password,
       org_id: pharmacy2.id,
       is_pharmacy: true
     }
 
-    p3 = %{
+    u3 = %{
       email: "drugsrus@test.com",
       password: password,
       org_id: pharmacy3.id,
       is_pharmacy: true
     }
 
-    c1 = %{
+    u4 = %{
       email: "sameday@test.com",
       password: password,
       org_id: courier1.id,
       is_courier: true
     }
 
-    c2 = %{
+    u5 = %{
       email: "previousday@test.com",
       password: password,
       org_id: courier2.id,
       is_courier: true
     }
 
-    gen_user(p1)
-    gen_user(p2)
-    gen_user(p3)
-    gen_user(c1)
-    gen_user(c2)
+    gen_user(u1)
+    gen_user(u2)
+    gen_user(u3)
+    gen_user(u4)
+    gen_user(u5)
   end
 
   defp gen_courier(attrs) do
