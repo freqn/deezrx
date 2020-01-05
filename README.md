@@ -1,20 +1,32 @@
 # Deezrx
 
-To start your Phoenix server:
+To start Deezrx:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
+  * Prepare the database with `mix ecto.create && mix ecto.migrate && mix run priv/repo/seeds.exs`
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+Ready to run in production? Please [check the deployment guides](http://www.phoenixframework.org/docs/deployment).
 
-## Learn more
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+
+## Test Users
+
+Password for demo accounts: password123
+
+Login email addresses for Pharmacy & Courier demo accounts:
+
+BetterRx: betterrx@test.com
+
+BestrRx: bestrx@test.com
+
+Drugs R Us: drugsrus@test.com
+
+Same Day Delivery: sameday@test.com
+
+Previous Day Delivery: previousday@test.com
+
+
