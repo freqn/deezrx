@@ -1,14 +1,13 @@
 defmodule Deezrx.Accounts do
-  @moduledoc """
-  The Accounts context.
-  """
-
   import Ecto.Query, warn: false
-  alias Deezrx.Repo
+  alias Deezrx.{Repo, Accounts}
 
-  alias Deezrx.Accounts.Courier
-  alias Deezrx.Accounts.Pharmacy
-  alias Deezrx.Accounts.Order
+  alias Accounts.{
+    Courier,
+    Pharmacy,
+    Order,
+    User
+  }
 
   def list_couriers do
     Repo.all(Courier)
@@ -36,11 +35,63 @@ defmodule Deezrx.Accounts do
     Courier.changeset(courier, %{})
   end
 
-  def list_orders() do
+  # Pharmacies
+
+  def list_pharmacies do
+    Repo.all(Pharmacy)
+  end
+
+  def get_pharmacy!(id), do: Repo.get!(Pharmacy, id)
+
+  def create_pharmacy(attrs \\ %{}) do
+    %Pharmacy{}
+    |> Pharmacy.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_pharmacy(%Pharmacy{} = pharmacy, attrs) do
+    pharmacy
+    |> Pharmacy.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_pharmacy(%Pharmacy{} = pharmacy) do
+    Repo.delete(pharmacy)
+  end
+
+  def change_pharmacy(%Pharmacy{} = pharmacy) do
+    Pharmacy.changeset(pharmacy, %{})
+  end
+
+  # Orders
+
+  def list_orders do
     Repo.all(Order)
   end
 
-  alias Deezrx.Accounts.User
+  def get_order!(id), do: Repo.get!(Order, id)
+
+  def create_order(attrs \\ %{}) do
+    %Order{}
+    |> Order.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_order(%Order{} = order, attrs) do
+    order
+    |> Order.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_order(%Order{} = order) do
+    Repo.delete(order)
+  end
+
+  def change_order(%Order{} = order) do
+    Order.changeset(order, %{})
+  end
+
+  # Users
 
   def list_users do
     Repo.all(User)

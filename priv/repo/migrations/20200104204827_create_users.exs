@@ -5,7 +5,7 @@ defmodule Deezrx.Repo.Migrations.CreateUsers do
     create table(:users) do
       add(:email, :string)
       add(:password_hash, :string)
-      add(:org_id, :string)
+      add(:org_id, :integer)
       add(:is_pharmacy, :boolean, default: false)
       add(:is_courier, :boolean, default: false)
 
