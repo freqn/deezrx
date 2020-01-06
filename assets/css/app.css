@@ -339,14 +339,6 @@ a.button:hover {
   background: #659cde;
 }
 
-.button-gray {
-  background-color: hsl(0, 0%, 56%);
-}
-
-.button-gray:hover {
-  background: #659cde;
-}
-
 .button-danger {
   background-color: red;
 }

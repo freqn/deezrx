@@ -69,7 +69,7 @@ defmodule Deezrx.Accounts do
     Repo.all(Order)
   end
 
-  def get_order(id), do: Repo.get!(Order, id)
+  def get_order!(id), do: Repo.get!(Order, id)
 
   def create_order(attrs \\ %{}) do
     %Order{}
@@ -87,7 +87,7 @@ defmodule Deezrx.Accounts do
     Repo.delete(order)
   end
 
-  def change_order(order \\ %Order{}) do
+  def change_order(%Order{} = order) do
     Order.changeset(order, %{})
   end
 
