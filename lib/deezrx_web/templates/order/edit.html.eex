@@ -1,0 +1,6 @@
+<h1>Edit Order</h1>
+
+<%= render "form.html", changeset: @changeset, action: order_path(@conn,
+:update, @order.id), label: "Update" %>
+&nbsp;
+<%= link "Cancel", to: order_path(@conn, :index), class: "button button-gray" %>
