@@ -5,9 +5,13 @@
     <%= for order <- @orders do %>
       <li>
         <div>
-         <%= link to: order_path(@conn, :show, order.id) do %>
-            <h2><%= order.id %></h2>
+          <hr>
+          <%= link to: order_path(@conn, :show, order.id) do %>
+            <h2>Order #: <%= order.id %></h2>
           <% end %>
+          <p><b>Patient</b>: <%= "#{order.patient_first_name} #{order.patient_last_name}"%></p>
+          <p><b>Pickup Time</b>: <%=order.pickup_time%></p>
+          <p><b>Updated at</b>: <%=order.updated_at%></p>
         </div>
       </li>
     <% end %>

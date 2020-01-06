@@ -28,33 +28,33 @@ defmodule DeezrxWeb.OrderController do
     end
   end
 
-  # def edit(conn, %{"id" => book_id}) do
-  #   book = Store.get_book(book_id)
-  #   changeset = Store.change_book(book)
+  def edit(conn, %{"id" => order_id}) do
+    order = Accounts.get_order!(order_id)
+    changeset = Accounts.change_order(order)
 
-  #   render(conn, "edit.html", changeset: changeset, book: book)
-  # end
+    render(conn, "edit.html", changeset: changeset, order: order)
+  end
 
-  # def update(conn, %{"id" => book_id, "book" => book_params}) do
-  #   book = Store.get_book(book_id)
+  def update(conn, %{"id" => order_id, "order" => order_params}) do
+    order = Accounts.get_order!(order_id)
 
-  #   case Store.update_book(book, book_params) do
-  #     {:ok, book} ->
-  #       conn
-  #       |> put_flash(:info, "Book updated")
-  #       |> redirect(to: "/")
+    case Accounts.update_order(order, order_params) do
+      {:ok, order} ->
+        conn
+        |> put_flash(:info, "Book updated")
+        |> redirect(to: "/")
 
-  #     {:error, changeset} ->
-  #       render(conn, "edit.html", changeset: changeset)
-  #   end
-  # end
+      {:error, changeset} ->
+        render(conn, "edit.html", changeset: changeset)
+    end
+  end
 
-  # def delete(conn, %{"id" => book_id}) do
-  #   book = Store.get_book(book_id)
-  #   Store.delete_book(book)
+  def delete(conn, %{"id" => order_id}) do
+    order = Accounts.get_order!(order_id)
+    Accounts.delete_order(order)
 
-  #   conn
-  #   |> put_flash(:info, "#{book.title} deleted")
-  #   |> redirect(to: "/")
-  # end
+    conn
+    |> put_flash(:info, "#{order.title} deleted")
+    |> redirect(to: "/")
+  end
 end

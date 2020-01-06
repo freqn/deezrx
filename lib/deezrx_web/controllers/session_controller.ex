@@ -15,7 +15,7 @@ defmodule DeezrxWeb.SessionController do
     case Accounts.authenticate_user(email, password) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Welcome to Storex")
+        |> put_flash(:info, "Welcome to DeezRx")
         |> CurrentUser.set(user)
         |> redirect(to: order_path(conn, :index))
 

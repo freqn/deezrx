@@ -34,9 +34,9 @@
       <%= label f, :delivered %>
       <%= error_tag f, :delivered %>
       <%= checkbox f, :delivered %>
-    </div>
-
+    </div
   </div>
-
   <%= submit @label, class: "button button-primary" %>
+  &nbsp;
+  <%= link "Cancel", to: order_path(@conn, :index), class: "button" %>
 <% end %>
