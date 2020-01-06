@@ -7,7 +7,7 @@ defmodule DeezrxWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
-    # plug(DeezrxWeb.Plugs.CurrentUser)
+    plug(DeezrxWeb.Plugs.CurrentUser)
   end
 
   pipeline :api do
@@ -19,7 +19,6 @@ defmodule DeezrxWeb.Router do
     pipe_through(:browser)
 
     get("/", OrderController, :index)
-    resources("/orders", OrderController)
     resources("/sessions", SessionController, only: [:new, :create], singleton: true)
   end
 

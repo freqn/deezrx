@@ -1,16 +1,12 @@
 <section>
   <ul class="grid">
     <h2>Orders</h2>
-    <%= link "New Order", to: order_path(@conn, :new), class: "button" %>
     <%= for order <- @orders do %>
       <li>
         <div>
-        <%= link to: order_path(@conn, :show, order.id) do %>
-            <h2 class=""><%= "#{order.patient_first_name} #{order.patient_last_name}" %></h2>
-          <% end %>
+         <h3><%= "Order ##{order.id} #{order.patient_first_name} #{order.patient_last_name}"%></h2>
         </div>
       </li>
-      
     <% end %>
   </ul>
 </section>
