@@ -1,0 +1,24 @@
+<h1>Order ID:<%= @order.id %></h1>
+<div>
+
+  <p>
+    <b>Patient</b>:<%= "#{@order.patient_first_name} #{@order.patient_last_name}" %>
+  </p>
+  <p>
+    <b>Prescription</b>:<%= @order.prescription %>
+  </p>
+  <p>
+    <b>Address</b>:<%= @order.patient_address %>
+  </p>
+  <p>
+    <b>Pickup date</b>:<%= @order.pickup_date %>
+  </p>
+  <p>
+    <b>Pickup time</b>:<%= @order.pickup_time %>
+  </p>
+  <p>
+    <b>Delivered</b>:<%= @order.delivered %>
+  </p>
+</div>
+
+<%= link "Back to orders", to: order_path(@conn, :index), class: "button button-primary" %>

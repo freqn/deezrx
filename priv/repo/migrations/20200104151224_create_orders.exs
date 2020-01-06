@@ -3,16 +3,15 @@ defmodule Deezrx.Repo.Migrations.CreateOrders do
 
   def change do
     create table(:orders) do
-      add :patient_first_name, :string
-      add :patient_last_name, :string
-      add :patient_address, :string
-      add :description, :string
-      add :pickup_date, :date
-      add :pickup_time, :time
-      add :pharmacy_id, :integer
-
+      add(:patient_first_name, :string)
+      add(:patient_last_name, :string)
+      add(:patient_address, :string)
+      add(:prescription, :string)
+      add(:pickup_date, :string)
+      add(:pickup_time, :string)
+      add(:pharmacy_id, :integer)
+      add(:delivered, :boolean, default: false)
       timestamps()
     end
-
   end
 end

@@ -89,40 +89,44 @@ defmodule Seed do
       patient_first_name: "Carl",
       patient_last_name: "Weathers",
       patient_address: "60 Main, Testville, OH, 45632",
-      description: "Prilosec for 3 months",
-      pickup_date: Date.utc_today(),
-      pickup_time: ~T[19:39:31.056226],
-      pharmacy_id: pharmacy1.id
+      prescription: "Prilosec for 3 months",
+      pickup_date: "01/08/20",
+      pickup_time: "7:39:31",
+      pharmacy_id: pharmacy1.id,
+      delivered: false
     }
 
     o2 = %{
       patient_first_name: "Joe",
       patient_last_name: "Weller",
       patient_address: "58 3rd St, Columbus, OH, 45632",
-      description: "Xanax for 3 months",
-      pickup_date: ~D[2020-01-22],
-      pickup_time: ~T[19:39:31.056226],
-      pharmacy_id: pharmacy1.id
+      prescription: "Xanax for 3 months",
+      pickup_date: "01/07/20",
+      pickup_time: "7:39:31",
+      pharmacy_id: pharmacy1.id,
+      delivered: false
     }
 
     o3 = %{
       patient_first_name: "Sarah",
       patient_last_name: "Rodriquez",
       patient_address: "3 Innovation Blvd, Lebanon, OH, 45236",
-      description: "Oxy for 3 months",
-      pickup_date: Date.utc_today(),
-      pickup_time: ~T[09:39:31.056226],
-      pharmacy_id: pharmacy2.id
+      prescription: "Oxy for 3 months",
+      pickup_date: "01/07/20",
+      pickup_time: "7:39:31",
+      pharmacy_id: pharmacy2.id,
+      delivered: false
     }
 
     o4 = %{
       patient_first_name: "Pablo",
       patient_last_name: "Escobar",
       patient_address: "666 South Ave, Bogota, KY, 43256",
-      description: "ibuprofen 1600mg for 3 months",
-      pickup_date: Date.utc_today(),
-      pickup_time: ~T[19:39:31.056226],
-      pharmacy_id: pharmacy3.id
+      prescription: "ibuprofen 1600mg for 3 months",
+      pickup_date: "01/07/20",
+      pickup_time: "7:39:31",
+      pharmacy_id: pharmacy3.id,
+      delivered: false
     }
 
     gen_order(o1)

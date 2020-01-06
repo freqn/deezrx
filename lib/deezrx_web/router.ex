@@ -19,6 +19,7 @@ defmodule DeezrxWeb.Router do
     pipe_through(:browser)
 
     get("/", OrderController, :index)
+    resources("/orders", OrderController)
     resources("/sessions", SessionController, only: [:new, :create], singleton: true)
   end
 

@@ -1,0 +1,42 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <div class="form-group">
+    <div class="form-field">
+      <%= label f, :patient_first_name %>
+      <%= error_tag f, :patient_first_name %>
+      <%= text_input f, :patient_first_name %>
+    </div>
+    <div class="form-field">
+      <%= label f, :patient_last_name %>
+      <%= error_tag f, :patient_last_name %>
+      <%= text_input f, :patient_last_name %>
+    </div>
+    <div class="form-field">
+      <%= label f, :patient_address %>
+      <%= error_tag f, :patient_address %>
+      <%= text_input f, :patient_address %>
+    </div>
+    <div class="form-field">
+      <%= label f, :prescription %>
+      <%= error_tag f, :prescription %>
+      <%= text_input f, :prescription %>
+    </div>
+    <div class="form-field">
+      <%= label f, :pickup_date %>
+      <%= error_tag f, :pickup_date %>
+      <%= text_input f, :pickup_date %>
+    </div>
+    <div class="form-field">
+      <%= label f, :pickup_time %>
+      <%= error_tag f, :pickup_time %>
+      <%= text_input f, :pickup_time %>
+    </div>
+    <div class="form-field">
+      <%= label f, :delivered %>
+      <%= error_tag f, :delivered %>
+      <%= checkbox f, :delivered %>
+    </div>
+
+  </div>
+
+  <%= submit @label, class: "button button-primary" %>
+<% end %>
