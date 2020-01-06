@@ -90,8 +90,8 @@ defmodule Seed do
       patient_last_name: "Weathers",
       patient_address: "60 Main, Testville, OH, 45632",
       description: "Prilosec for 3 months",
-      pickup_date: Date.utc_today(),
-      pickup_time: ~T[19:39:31.056226],
+      pickup_date: Date.to_string(Date.utc_today()),
+      pickup_time: Time.to_string(~T[19:39:31.056226]),
       pharmacy_id: pharmacy1.id
     }
 
@@ -100,8 +100,8 @@ defmodule Seed do
       patient_last_name: "Weller",
       patient_address: "58 3rd St, Columbus, OH, 45632",
       description: "Xanax for 3 months",
-      pickup_date: ~D[2020-01-22],
-      pickup_time: ~T[19:39:31.056226],
+      pickup_date: "2020-02-23",
+      pickup_time: Time.to_string(~T[23:00:00.123456]),
       pharmacy_id: pharmacy1.id
     }
 
@@ -110,8 +110,8 @@ defmodule Seed do
       patient_last_name: "Rodriquez",
       patient_address: "3 Innovation Blvd, Lebanon, OH, 45236",
       description: "Oxy for 3 months",
-      pickup_date: Date.utc_today(),
-      pickup_time: ~T[09:39:31.056226],
+      pickup_date: todays_date(),
+      pickup_time: Time.to_string(~T[23:00:00.123456]),
       pharmacy_id: pharmacy2.id
     }
 
@@ -119,9 +119,9 @@ defmodule Seed do
       patient_first_name: "Pablo",
       patient_last_name: "Escobar",
       patient_address: "666 South Ave, Bogota, KY, 43256",
-      description: "ibuprofen 1600mg for 3 months",
-      pickup_date: Date.utc_today(),
-      pickup_time: ~T[19:39:31.056226],
+      description: "ibuprofen 1600mg for 3 months - bullet wounds",
+      pickup_date: todays_date(),
+      pickup_time: Time.to_string(~T[23:00:00.123456]),
       pharmacy_id: pharmacy3.id
     }
 
@@ -195,6 +195,10 @@ defmodule Seed do
 
   defp gen_user(attrs) do
     Accounts.create_user(attrs)
+  end
+
+  defp todays_date() do
+    Date.to_string(Date.utc_today())
   end
 end
 

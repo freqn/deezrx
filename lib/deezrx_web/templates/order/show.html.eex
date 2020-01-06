@@ -1,0 +1,15 @@
+<h1>Order ID: <%= @order.id%></h1>
+ <%= link "Edit", to: order_path(@conn, :edit, @order), class: "button" %>
+ &nbsp;
+ <%= link "Delete", 
+            to: order_path(@conn, :delete, @order.id),
+            method: :delete, 
+            data: [confirm: "Are you sure?"],
+            class: "button button-danger" %>
+<ul>
+  <li> <b>Patient</b>: <%= "#{@order.patient_first_name} #{@order.patient_last_name}" %></li>
+  <li><b>Pickup Day</b>: <%= @order.pickup_date %></li>
+  <li><b>Pickup Time</b>: <%= @order.pickup_time%></li>
+  <li><b>Prescription</b>: <%= @order.description%></li>
+</ul>
+<%= link "Back to orders", to: order_path(@conn, :index), class: "button button-primary" %>

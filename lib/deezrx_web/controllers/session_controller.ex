@@ -1,7 +1,7 @@
 defmodule DeezrxWeb.SessionController do
   use DeezrxWeb, :controller
   alias Deezrx.Accounts
-  alias DeezrxWeb.Plugs.CurrentUser
+  # alias DeezrxWeb.Plugs.CurrentUser
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -16,7 +16,7 @@ defmodule DeezrxWeb.SessionController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Welcome to Storex")
-        |> CurrentUser.set(user)
+        # |> CurrentUser.set(user)
         |> redirect(to: order_path(conn, :index))
 
       {:error, _} ->
