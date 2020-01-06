@@ -1,0 +1,6 @@
+<h1>Edit Order</h1>
+<%= render "form.html", 
+            changeset: @changeset, 
+            action: order_path(@conn, :update, @order.id), 
+            conn: @conn,
+            label: "Update" %>

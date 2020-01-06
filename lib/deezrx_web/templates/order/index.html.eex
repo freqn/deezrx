@@ -1,0 +1,19 @@
+<section>
+  <ul class="grid">
+    <h2>Orders</h2>
+    <%= link "New order", to: order_path(@conn, :new), class: "button button-primary" %>
+    <%= for order <- @orders do %>
+      <li>
+        <div>
+          <hr>
+          <%= link to: order_path(@conn, :show, order.id) do %>
+            <h2>Order #: <%= order.id %></h2>
+          <% end %>
+          <p><b>Patient</b>: <%= "#{order.patient_first_name} #{order.patient_last_name}"%></p>
+          <p><b>Pickup Time</b>: <%=order.pickup_time%></p>
+          <p><b>Updated at</b>: <%=order.updated_at%></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</section>
