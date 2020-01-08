@@ -8,6 +8,7 @@ defmodule Deezrx.Repo.Migrations.CreateUsers do
       add(:org_id, :integer)
       add(:is_pharmacy, :boolean, default: false)
       add(:is_courier, :boolean, default: false)
+      add(:is_admin, :boolean, default: false)
 
       timestamps()
     end

@@ -1,10 +1,34 @@
 defmodule DeezrxWeb.OrderController do
+  require IEx
   use DeezrxWeb, :controller
-
   alias Deezrx.Accounts
+  alias DeezrxWeb.Plugs.CurrentUser
 
   def index(conn, _params) do
-    render(conn, "index.html", orders: Accounts.list_orders())
+    user = conn |> CurrentUser.get()
+
+    cond do
+      CurrentUser.is_pharmacy?(conn) ->
+        render(conn, "index.html",
+          orders: user.org_id |> Accounts.list_orders_by_pharmacy(),
+          current_user: user
+        )
+
+      CurrentUser.is_courier?(conn) ->
+        render(conn, "index.html",
+          orders: user.org_id |> Accounts.list_orders_by_courier(),
+          current_user: user
+        )
+
+      CurrentUser.is_admin?(conn) ->
+        render(conn, "index.html",
+          orders: Accounts.list_orders(),
+          current_user: user
+        )
+
+      true ->
+        conn |> redirect(to: session_path(conn, :new))
+    end
   end
 
   def show(conn, %{"id" => order_id}) do
@@ -18,7 +42,7 @@ defmodule DeezrxWeb.OrderController do
 
   def create(conn, %{"order" => order_params}) do
     case Accounts.create_order(order_params) do
-      {:ok, _order} ->
+      {:ok, order} ->
         conn
         |> put_flash(:info, "Order created")
         |> render("index.html", orders: Accounts.list_orders())

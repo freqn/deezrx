@@ -1,4 +1,5 @@
 defmodule Deezrx.Accounts do
+  require IEx
   import Ecto.Query, warn: false
   alias Deezrx.{Repo, Accounts}
 
@@ -10,10 +11,12 @@ defmodule Deezrx.Accounts do
   }
 
   def list_couriers do
-    Repo.all(Courier)
+    Courier |> Repo.all()
   end
 
-  def get_courier!(id), do: Repo.get!(Courier, id)
+  def get_courier!(id) do
+    Courier |> Repo.get!(id)
+  end
 
   def create_courier(attrs \\ %{}) do
     %Courier{}
@@ -65,8 +68,16 @@ defmodule Deezrx.Accounts do
 
   # Orders
 
-  def list_orders do
+  def list_orders() do
     Repo.all(Order)
+  end
+
+  def list_orders_by_pharmacy(id) do
+    from(o in Order, where: o.pharmacy_id == ^id, select: o) |> Repo.all()
+  end
+
+  def list_orders_by_courier(id) do
+    from(o in Order, where: o.courier_id == ^id, select: o) |> Repo.all()
   end
 
   def get_order!(id), do: Repo.get!(Order, id)
@@ -128,5 +139,23 @@ defmodule Deezrx.Accounts do
   def authenticate_user(email, password) do
     Repo.get_by(User, email: email)
     |> User.check_password(password)
+  end
+
+  def mark_as_pharmacy(user) do
+    user
+    |> User.pharmacy_changeset(%{is_pharmacy: true})
+    |> Repo.update()
+  end
+
+  def mark_as_courier(user) do
+    user
+    |> User.courier_changeset(%{is_courier: true})
+    |> Repo.update()
+  end
+
+  def mark_as_admin(user) do
+    user
+    |> User.courier_changeset(%{is_admin: true})
+    |> Repo.update()
   end
 end

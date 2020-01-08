@@ -7,7 +7,6 @@ defmodule DeezrxWeb.SessionController do
     render(conn, "new.html")
   end
 
-  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"credentials" => %{"email" => email, "password" => password}}) do
     # require IEx
     # IEx.pry()
@@ -24,5 +23,12 @@ defmodule DeezrxWeb.SessionController do
         |> put_flash(:error, "Unable to sign in")
         |> render("new.html")
     end
+  end
+
+  def delete(conn, _) do
+    conn
+    |> CurrentUser.forget()
+    |> put_flash(:info, "Goodbye!")
+    |> redirect(to: session_path(conn, :new))
   end
 end
