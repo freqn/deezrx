@@ -23,12 +23,12 @@
     <div class="form-field">
       <%= label f, :pickup_date %>
       <%= error_tag f, :pickup_date %>
-      <%= text_input f, :pickup_date %>
+      <%= text_input f, :pickup_date, [ placeholder: "mm/dd/yy" ] %>
     </div>
     <div class="form-field">
       <%= label f, :pickup_time %>
       <%= error_tag f, :pickup_time %>
-      <%= text_input f, :pickup_time %>
+      <%= text_input f, :pickup_time, [ placeholder: "hh/mm" ] %>
     </div>
     <div class="form-field">
       <%= label f, :delivered %>

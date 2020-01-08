@@ -20,6 +20,7 @@ defmodule DeezrxWeb.Plugs.CurrentUser do
     conn
     |> assign(@assign_name, user)
     |> assign(:is_pharmacy, is_pharmacy?(user))
+    |> assign(:is_courier, is_courier?(user))
   end
 
   def set(conn, user) do
@@ -37,6 +38,26 @@ defmodule DeezrxWeb.Plugs.CurrentUser do
 
   def is_pharmacy?(user) do
     user && user.is_pharmacy
+  end
+
+  def is_courier?(%Plug.Conn{} = conn) do
+    user = get(conn)
+    IO.inspect(user)
+    is_courier?(user)
+  end
+
+  def is_courier?(user) do
+    user && user.is_courier
+  end
+
+  def is_admin?(%Plug.Conn{} = conn) do
+    user = get(conn)
+    IO.inspect(user)
+    is_admin?(user)
+  end
+
+  def is_admin?(user) do
+    user && user.is_admin
   end
 
   def forget(conn) do

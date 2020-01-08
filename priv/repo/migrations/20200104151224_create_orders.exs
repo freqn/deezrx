@@ -9,7 +9,8 @@ defmodule Deezrx.Repo.Migrations.CreateOrders do
       add(:prescription, :string)
       add(:pickup_date, :string)
       add(:pickup_time, :string)
-      add(:pharmacy_id, :integer)
+      add(:pharmacy_id, references(:pharmacies))
+      add(:courier_id, references(:couriers))
       add(:delivered, :boolean, default: false)
       timestamps()
     end

@@ -54,25 +54,19 @@ defmodule Seed do
   end
 
   defp seed_pharmacies() do
-    courier1 = Repo.get_by!(Courier, name: "Same Day Delivery")
-    courier2 = Repo.get_by!(Courier, name: "Previous Day Delivery")
-
     p1 = %{
       name: "BetterRx",
-      address: "1275 Kinnear Road, Columbus, OH 43212",
-      courier_id: courier1.id
+      address: "1275 Kinnear Road, Columbus, OH 43212"
     }
 
     p2 = %{
       name: "BestRx",
-      address: "123 Austin St, Austin, TX 78702",
-      courier_id: courier1.id
+      address: "123 Austin St, Austin, TX 78702"
     }
 
     p3 = %{
       name: "Drugs R Us",
-      address: "4925 LA Ave, Los Angeles, CA 90056",
-      courier_id: courier2.id
+      address: "4925 LA Ave, Los Angeles, CA 90056"
     }
 
     gen_pharm(p1)
@@ -81,6 +75,9 @@ defmodule Seed do
   end
 
   defp seed_orders() do
+    courier1 = Repo.get_by!(Courier, name: "Same Day Delivery")
+    courier2 = Repo.get_by!(Courier, name: "Previous Day Delivery")
+
     pharmacy1 = Repo.get_by!(Pharmacy, name: "BetterRx")
     pharmacy2 = Repo.get_by!(Pharmacy, name: "BestRx")
     pharmacy3 = Repo.get_by!(Pharmacy, name: "Drugs R Us")
@@ -93,6 +90,7 @@ defmodule Seed do
       pickup_date: "01/08/20",
       pickup_time: "7:39:31",
       pharmacy_id: pharmacy1.id,
+      courier_id: courier1.id,
       delivered: false
     }
 
@@ -104,6 +102,7 @@ defmodule Seed do
       pickup_date: "01/07/20",
       pickup_time: "7:39:31",
       pharmacy_id: pharmacy1.id,
+      courier_id: courier1.id,
       delivered: false
     }
 
@@ -115,6 +114,7 @@ defmodule Seed do
       pickup_date: "01/07/20",
       pickup_time: "7:39:31",
       pharmacy_id: pharmacy2.id,
+      courier_id: courier1.id,
       delivered: false
     }
 
@@ -126,6 +126,7 @@ defmodule Seed do
       pickup_date: "01/07/20",
       pickup_time: "7:39:31",
       pharmacy_id: pharmacy3.id,
+      courier_id: courier2.id,
       delivered: false
     }
 
@@ -176,6 +177,12 @@ defmodule Seed do
       password: password,
       org_id: courier2.id,
       is_courier: true
+    }
+
+    u5 = %{
+      email: "admin@test.com",
+      password: password,
+      is_admin: true
     }
 
     gen_user(u1)
