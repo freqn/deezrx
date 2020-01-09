@@ -1,4 +1,4 @@
-# Deezrx
+# DeezRx
 
 ## Important Instructions
 
