@@ -138,12 +138,12 @@ defmodule Seed do
       delivered: false
     }
 
-    o4 = %{
+    o5 = %{
       patient_first_name: "Sal",
       patient_last_name: "Roskov",
       patient_address: "Dream Theater Road",
       prescription: "moonshine.. lots of it",
-      pickup_date: ~D[2020-01-23],
+      pickup_date: Date.utc_today(),
       pickup_time: ~T[05:49:15],
       pharmacy_name: pharmacy3.name,
       pharmacy_id: pharmacy3.id,
@@ -155,6 +155,7 @@ defmodule Seed do
     gen_order(o2)
     gen_order(o3)
     gen_order(o4)
+    gen_order(o5)
   end
 
   defp seed_users() do
