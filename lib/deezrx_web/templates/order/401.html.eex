@@ -1,0 +1,2 @@
+<h1>401 UNAUTHORIZED</h1>
+<%= link "Back to orders", to: order_path(@conn, :index), class: "button button-primary" %>

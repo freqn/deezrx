@@ -1,17 +1,44 @@
 <section>
   <ul class="grid">
-    <h2>Orders</h2>
-    <%= link "New order", to: order_path(@conn, :new), class: "button button-primary" %>
+    <h2><%= @org %> Orders</h2>
+    <%= if @user.is_pharmacy or @user.is_admin do %>
+        <%= link "New order", to: order_path(@conn, :new), class: "button button-primary" %>
+    <% end %>
     <%= for order <- @orders do %>
       <li>
         <div>
           <hr>
-          <%= link to: order_path(@conn, :show, order.id) do %>
-            <h2>Order #: <%= order.id %></h2>
+          <h2>Order # <%= order.id %></h2>
+          <% if @user.is_pharmacy or @user.is_admin do %>
+            <%= link to: order_path(@conn, :show, order.id) do %>
+              Details
+            <% end %>
           <% end %>
           <p><b>Patient</b>: <%= "#{order.patient_first_name} #{order.patient_last_name}"%></p>
-          <p><b>Pickup Time</b>: <%=order.pickup_time%></p>
-          <p><b>Updated at</b>: <%=order.updated_at%></p>
+          <p><b>Delivery Address</b>: <%=order.patient_address%></p>
+          <p><b>Pickup</b>: <%= order.pickup_date %> at <%=order.pickup_time%></p>
+          <%= if @user.is_courier do %>
+            <p><b>Pharmacy</b>: <%=order.pharmacy_name%></p>
+            <p><b>Undeliverable</b>: <%=order.undeliverable%></p>
+          <% end %>
+          <p><b>Delivered</b>: <%=order.delivered%></p>
+          <p>
+          <%= if @user.is_pharmacy or @user.is_admin do %>
+            <%= link to: order_path(@conn, :show, order.id) do %>
+            View Details
+            <% end %>
+          <% end %>
+          </p>
+          <%= if @user.is_courier do %>
+            <%= link "Deliver", to: order_path(@conn, :deliver, order), class: "button button-update"%>
+            &nbsp;
+            <%= if order.undeliverable == false do %>
+              <%= link "Undeliverable", to: order_path(@conn, :mark_undeliverable, order), class: "button button-danger"%>
+            <% end %>
+          <% end %>
+          <%= if @user.is_pharmacy or @user.is_admin do %>
+            <%= link "Edit", to: order_path(@conn, :edit, order), class: "button"%>
+          <% end %>
         </div>
       </li>
     <% end %>

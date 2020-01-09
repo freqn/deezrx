@@ -10,9 +10,12 @@ defmodule Deezrx.Accounts.Order do
     field(:prescription, :string)
     belongs_to(:pharmacy, Accounts.Pharmacy)
     belongs_to(:courier, Accounts.Courier)
-    field(:pickup_date, :string)
-    field(:pickup_time, :string)
+    field(:pickup_date, :date)
+    field(:pickup_time, :time)
+    field(:pharmacy_name, :string)
     field(:delivered, :boolean, default: false)
+    field(:undeliverable, :boolean, default: false)
+    field(:active, :boolean, default: true)
 
     timestamps()
   end
@@ -27,9 +30,12 @@ defmodule Deezrx.Accounts.Order do
       :prescription,
       :pickup_date,
       :pickup_time,
+      :pharmacy_name,
       :pharmacy_id,
       :courier_id,
-      :delivered
+      :delivered,
+      :undeliverable,
+      :active
     ])
     |> validate_required([
       :patient_first_name,

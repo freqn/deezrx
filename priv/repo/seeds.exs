@@ -16,7 +16,8 @@ defmodule Seed do
     Accounts.Courier,
     Accounts.Pharmacy,
     Accounts.Order,
-    Accounts.User
+    Accounts.User,
+    Accounts.PharmacyCourier
   }
 
   def generate() do
@@ -25,6 +26,7 @@ defmodule Seed do
     seed_pharmacies()
     seed_orders()
     seed_users()
+    seed_pharmacy_couriers()
   end
 
   defp clean() do
@@ -32,10 +34,12 @@ defmodule Seed do
     Repo.delete_all(Courier)
     Repo.delete_all(Pharmacy)
     Repo.delete_all(User)
+    Repo.delete_all(PharmacyCourier)
     Repo.query("ALTER SEQUENCE pharmacies_id_seq RESTART")
     Repo.query("ALTER SEQUENCE couriers_id_seq RESTART")
     Repo.query("ALTER SEQUENCE orders_id_seq RESTART")
     Repo.query("ALTER SEQUENCE users_id_seq RESTART")
+    Repo.query("ALTER SEQUENCE pharmacy_couriers_id_seq RESTART")
   end
 
   defp seed_couriers() do
@@ -87,8 +91,9 @@ defmodule Seed do
       patient_last_name: "Weathers",
       patient_address: "60 Main, Testville, OH, 45632",
       prescription: "Prilosec for 3 months",
-      pickup_date: "01/08/20",
-      pickup_time: "7:39:31",
+      pickup_date: Date.utc_today(),
+      pickup_time: ~T[02:15:15],
+      pharmacy_name: pharmacy1.name,
       pharmacy_id: pharmacy1.id,
       courier_id: courier1.id,
       delivered: false
@@ -99,8 +104,9 @@ defmodule Seed do
       patient_last_name: "Weller",
       patient_address: "58 3rd St, Columbus, OH, 45632",
       prescription: "Xanax for 3 months",
-      pickup_date: "01/07/20",
-      pickup_time: "7:39:31",
+      pickup_date: Date.utc_today(),
+      pickup_time: ~T[12:20:15],
+      pharmacy_name: pharmacy1.name,
       pharmacy_id: pharmacy1.id,
       courier_id: courier1.id,
       delivered: false
@@ -111,8 +117,9 @@ defmodule Seed do
       patient_last_name: "Rodriquez",
       patient_address: "3 Innovation Blvd, Lebanon, OH, 45236",
       prescription: "Oxy for 3 months",
-      pickup_date: "01/07/20",
-      pickup_time: "7:39:31",
+      pickup_date: Date.utc_today(),
+      pickup_time: ~T[07:30:15],
+      pharmacy_name: pharmacy2.name,
       pharmacy_id: pharmacy2.id,
       courier_id: courier1.id,
       delivered: false
@@ -123,8 +130,9 @@ defmodule Seed do
       patient_last_name: "Escobar",
       patient_address: "666 South Ave, Bogota, KY, 43256",
       prescription: "ibuprofen 1600mg for 3 months",
-      pickup_date: "01/07/20",
-      pickup_time: "7:39:31",
+      pickup_date: Date.utc_today(),
+      pickup_time: ~T[05:49:15],
+      pharmacy_name: pharmacy3.name,
       pharmacy_id: pharmacy3.id,
       courier_id: courier2.id,
       delivered: false
@@ -179,7 +187,7 @@ defmodule Seed do
       is_courier: true
     }
 
-    u5 = %{
+    u6 = %{
       email: "admin@test.com",
       password: password,
       is_admin: true
@@ -190,6 +198,24 @@ defmodule Seed do
     gen_user(u3)
     gen_user(u4)
     gen_user(u5)
+    gen_user(u6)
+  end
+
+  def seed_pharmacy_couriers do
+    Repo.insert!(%PharmacyCourier{
+      pharmacy_id: 1,
+      courier_id: 1
+    })
+
+    Repo.insert!(%PharmacyCourier{
+      pharmacy_id: 2,
+      courier_id: 1
+    })
+
+    Repo.insert!(%PharmacyCourier{
+      pharmacy_id: 3,
+      courier_id: 2
+    })
   end
 
   defp gen_courier(attrs) do
