@@ -138,6 +138,19 @@ defmodule Seed do
       delivered: false
     }
 
+    o4 = %{
+      patient_first_name: "Sal",
+      patient_last_name: "Roskov",
+      patient_address: "Dream Theater Road",
+      prescription: "moonshine.. lots of it",
+      pickup_date: ~D[2020-01-23],
+      pickup_time: ~T[05:49:15],
+      pharmacy_name: pharmacy3.name,
+      pharmacy_id: pharmacy3.id,
+      courier_id: courier2.id,
+      delivered: false
+    }
+
     gen_order(o1)
     gen_order(o2)
     gen_order(o3)

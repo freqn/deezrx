@@ -348,7 +348,7 @@ a.button:hover {
 }
 
 .button-danger {
-  background-color: red;
+  background-color: rgb(214, 74, 74);
 }
 
 .cart-items {

@@ -1,27 +1,39 @@
 <h1>Order ID:<%= @order.id %></h1>
-<%= link "Edit", to: order_path(@conn, :edit, @order), class: "button button-primary"%>
-  &nbsp
-  <%= link "Cancel Order", to: order_path(@conn, :cancel, @order), class: "button button-danger" %>
-  <br>
-  <br>
-  <br>
+ <div>
+  <%= if @user.is_pharmacy do %>
+    <%= link "Edit", to: order_path(@conn, :edit, @order), class: "button button-primary"%>
+    &nbsp
+    <%= link "Cancel Order", to: order_path(@conn, :cancel, @order), class: "button button-danger" %>
+    <br>
+    <br>
+    <br>
+  <% end %>
   <p>
-    <b>Patient</b>:<%= "#{@order.patient_first_name} #{@order.patient_last_name}" %>
+    <b>Patient</b>: <%= "#{@order.patient_first_name} #{@order.patient_last_name}" %>
   </p>
   <p>
-    <b>Prescription</b>:<%= @order.prescription %>
+    <b>Prescription</b>: <%= @order.prescription %>
   </p>
   <p>
-    <b>Address</b>:<%= @order.patient_address %>
+    <b>Address</b>: <%= @order.patient_address %>
   </p>
   <p>
-    <b>Pickup date</b>:<%= @order.pickup_date %>
+    <b>Pickup date</b>: <%= @order.pickup_date %>
   </p>
   <p>
-    <b>Pickup time</b>:<%= @order.pickup_time %>
+    <b>Pickup time</b>: <%= @order.pickup_time %>
   </p>
   <p>
-    <b>Delivered</b>:<%= @order.delivered %>
+    <b>Pharmacy</b>: <%= @order.pharmacy_name %>
+  </p>
+  <p>
+    <b>Undeliverable</b>: <%= @order.undeliverable %>
+  </p>
+  <p>
+    <b>Delivered</b>: <%= @order.delivered %>
+  </p>
+  <p>
+    <b>Active</b>: <%= @order.active %>
   </p>
 </div>
 

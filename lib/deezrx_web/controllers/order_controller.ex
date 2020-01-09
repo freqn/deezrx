@@ -45,13 +45,13 @@ defmodule DeezrxWeb.OrderController do
         order = Accounts.get_order!(order_id)
 
         if user.org_id == order.pharmacy_id do
-          render(conn, "show.html", order: order)
+          render(conn, "show.html", order: order, user: user)
         else
           handle_exception(conn)
         end
 
       conn |> admin_user?(user) ->
-        render(conn, "show.html", order: Accounts.get_order!(order_id))
+        render(conn, "show.html", order: Accounts.get_order!(order_id), user: user)
 
       true ->
         conn |> handle_exception
@@ -69,9 +69,6 @@ defmodule DeezrxWeb.OrderController do
       true ->
         conn |> handle_exception()
     end
-
-    # changeset = Accounts.change_order()
-    # render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"order" => order_params}) do

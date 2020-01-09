@@ -8,9 +8,6 @@ defmodule DeezrxWeb.SessionController do
   end
 
   def create(conn, %{"credentials" => %{"email" => email, "password" => password}}) do
-    # require IEx
-    # IEx.pry()
-
     case Accounts.authenticate_user(email, password) do
       {:ok, user} ->
         conn

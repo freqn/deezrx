@@ -74,13 +74,21 @@ defmodule Deezrx.Accounts do
   # Orders
 
   def list_orders() do
-    Repo.all(Order)
+    from(o in Order,
+      order_by: [desc: o.pickup_date, desc: o.pickup_time],
+      where: o.active == true,
+      select: o
+    )
+    |> Repo.all()
   end
 
   def list_orders_by_pharmacy(id) do
+    date = Date.utc_today()
+
     from(o in Order,
-      order_by: o.pickup_time,
+      order_by: [desc: o.pickup_date, desc: o.pickup_time],
       where: o.pharmacy_id == ^id,
+      where: o.pickup_date == ^date,
       where: o.active == true,
       select: o
     )
@@ -88,8 +96,12 @@ defmodule Deezrx.Accounts do
   end
 
   def list_orders_by_courier(id) do
+    date = Date.utc_today()
+
     from(o in Order,
+      order_by: [desc: o.pickup_date, desc: o.pickup_time],
       where: o.courier_id == ^id,
+      where: o.pickup_date == ^date,
       where: o.delivered == false,
       where: o.active == true,
       select: o
