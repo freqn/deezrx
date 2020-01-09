@@ -35,6 +35,39 @@ Login email addresses for Pharmacy & Courier demo accounts:
 **Admin Access:** - admin@test.com
 
 
+## Answers to Project Questions:
+
+**What was the hardest part of the implementation?**
+
+The hardest part was engineering the relationship between pharmacies and couriers. Should it be a many-many, etc? Since it seemed vague and open-ended, I first opted to allow the orders to dictate that connection (I envisioned a pharmacy having a list of couriers to choose from when creating an order), but then I decided to create an internal mapping (join table) between the two models (since couriers service pharmacies in the requirements) in order to associate the two. My struggle with this was how to use Ecto along with the relationship declarations I added to the schemas to derive that connection instead of what I implemented in the create method of the order controller. The configuration with Ecto, along with preloading, especially parent associations (how do I get courier names from the orders to display in the index view when loggged in as a pharmacy?) are topics I'm still confused about.
+
+Working with dates and time was also challenging when sorting out my queries :).
+
+
+**What would be your next couple of tasks if you had more time?**
+
+I'll answer this with a list:
+
+1) Test coverage - I was unclear on how to test the role-based access I implemented in the order controller.
+    
+2) If I had time, I'd revisit my implementation or role-based action handling and possibly refactor.
+
+3) Refactoring the pharmacy, courier, and admin actions into separate controllers
+   
+4) Implementing all of the optional items in the assignment. I started moving toward the admin features early-on since I started the project by modeling the basic CRUD actions for the entities within the Accounts context, and the admin piece seemed more natural once I figured out how I wanted to implement the roles. I'd definitely continue in that direction. The reporting aspect also seems like a very interesting feature to work on.
+
+
+**How could we change the project to be more interesting?**
+
+1) Add bonus points for live notifications or any live-view things (chat, etc.) :)
+   
+2) Add more time for those of use who are newer to Elixir and Phoenix :)
+
+
+Don't hesitate to contact me with additional questions.
+
+Thank you!
+
 
 
 
