@@ -253,65 +253,6 @@ a:visited {
   box-sizing: border-box;
 }
 
-.book-small {
-  padding: 20px;
-}
-
-.book-small .book__image {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.book-small .book__title {
-  margin-bottom: 3px;
-}
-
-.book-small .book__price {
-  font-weight: 100;
-  color: #8797ae;
-}
-
-.book-hero {
-  margin: 40px 0;
-  overflow: hidden;
-}
-
-.book-hero .book__image,
-.book-hero .book__description {
-  box-sizing: border-box;
-}
-
-.book-hero .book__image {
-  float: left;
-  width: 33.3333%;
-}
-
-.book-hero .book__image img {
-  width: 100%;
-}
-
-.book-hero .book__description {
-  float: left;
-  width: 66.6666%;
-  padding-left: 40px;
-}
-
-.value-tag {
-}
-
-.value-tag__title {
-  font-size: 0.9em;
-  font-weight: 100;
-  color: #8797ae;
-  text-transform: uppercase;
-}
-
-.value-tag__content {
-  font-size: 1.3em;
-  font-weight: 100;
-  color: #4a90e2;
-}
-
 .button {
   display: inline-block;
   padding: 10px 20px;
@@ -351,45 +292,7 @@ a.button:hover {
   background-color: rgb(214, 74, 74);
 }
 
-.cart-items {
-  font-size: 18px;
-  margin: 40px 0;
-}
-
-.cart-item {
-  box-sizing: border-box;
-  overflow: hidden;
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.cart-item:last-child {
-  margin-bottom: 0;
-}
-
-.cart-item__image {
-  box-sizing: border-box;
-  float: left;
-  width: 10%;
-}
-
-.cart-item__title {
-  box-sizing: border-box;
-  float: left;
-  width: 60%;
-  padding-left: 40px;
-  padding-top: 3.5em;
-}
-
 .cart-item__units {
-  box-sizing: border-box;
-  float: left;
-  width: 15%;
-  padding-top: 2.5em;
-}
-
-.cart-item__price {
   box-sizing: border-box;
   float: left;
   width: 15%;
@@ -439,27 +342,4 @@ textarea {
   font-weight: 100;
   color: #8797ae;
   text-transform: uppercase;
-}
-
-.step {
-  display: inline-block;
-}
-
-.step a {
-  font-size: 0.8em;
-  display: inline-block;
-  margin: 0 3px;
-  padding-left: 5px;
-  width: 15px;
-  height: 20px;
-}
-
-.step.minus a {
-  color: #98484e;
-  background: #f6eaeb;
-}
-
-.step.plus a {
-  color: #5d8745;
-  background: #eff6eb;
 }

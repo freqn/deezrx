@@ -86,7 +86,7 @@ defmodule DeezrxWeb.OrderController do
         params = params |> Map.put("pharmacy_name", pharmacy.name)
 
         case Accounts.create_order(params) do
-          {:ok, order} ->
+          {:ok, _order} ->
             conn
             |> put_flash(:info, "Order created")
             |> redirect(to: "/")
@@ -123,7 +123,7 @@ defmodule DeezrxWeb.OrderController do
         order = Accounts.get_order!(order_id)
 
         case Accounts.update_order(order, order_params) do
-          {:ok, order} ->
+          {:ok, _order} ->
             conn
             |> put_flash(:info, "Order updated")
             |> redirect(to: "/")
@@ -141,7 +141,7 @@ defmodule DeezrxWeb.OrderController do
     order = Accounts.get_order!(id)
 
     case Accounts.update_order(order, %{active: false}) do
-      {:ok, order} ->
+      {:ok, _order} ->
         conn
         |> put_flash(:info, "Order Canceled")
         |> redirect(to: "/")
@@ -158,8 +158,8 @@ defmodule DeezrxWeb.OrderController do
       conn |> courier_user?(user) ->
         order = Accounts.get_order!(id)
 
-        case Accounts.update_order(order, %{delivered: true, active: false}) do
-          {:ok, order} ->
+        case Accounts.update_order(order, %{delivered: true}) do
+          {:ok, _order} ->
             conn
             |> put_flash(:info, "Delivered")
             |> redirect(to: "/")
@@ -179,7 +179,7 @@ defmodule DeezrxWeb.OrderController do
     order = Accounts.get_order!(id)
 
     case Accounts.update_order(order, %{undeliverable: true}) do
-      {:ok, order} ->
+      {:ok, _order} ->
         conn
         |> put_flash(:info, "Marked as Undeliverable")
         |> redirect(to: "/")
