@@ -1,11 +1,7 @@
 <h1>Order ID:<%= @order.id %></h1>
-<%= link "Edit", to: order_path(@conn, :edit, @order), class: "button"%>
+<%= link "Edit", to: order_path(@conn, :edit, @order), class: "button button-primary"%>
   &nbsp
-  <%= link "Delete", 
-            to: order_path(@conn, :delete, @order),
-            method: :delete, 
-            data: [confirm: "Are you sure?"],
-            class: "button button-danger" %>
+  <%= link "Cancel Order", to: order_path(@conn, :cancel, @order), class: "button button-danger" %>
   <br>
   <br>
   <br>

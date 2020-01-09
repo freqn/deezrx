@@ -20,6 +20,12 @@ defmodule DeezrxWeb.Router do
 
     get("/", OrderController, :index)
     get("/sessions", SessionController, :delete)
+    get("/orders/:id/deliver_order", OrderController, :deliver)
+    put("/orders/:id/deliver_order", OrderController, :deliver)
+    get("/orders/:id/cancel_order", OrderController, :cancel)
+    put("/orders/:id/cancel_order", OrderController, :cancel)
+    get("/orders/:id/mark_undeliverable", OrderController, :mark_undeliverable)
+    put("/orders/:id/mark_undeliverable", OrderController, :mark_undeliverable)
     resources("/orders", OrderController)
     resources("/sessions", SessionController, only: [:new, :create], singleton: true)
   end

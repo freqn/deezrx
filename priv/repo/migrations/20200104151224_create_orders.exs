@@ -7,11 +7,14 @@ defmodule Deezrx.Repo.Migrations.CreateOrders do
       add(:patient_last_name, :string)
       add(:patient_address, :string)
       add(:prescription, :string)
-      add(:pickup_date, :string)
-      add(:pickup_time, :string)
+      add(:pickup_date, :date)
+      add(:pickup_time, :time)
+      add(:pharmacy_name, :string)
       add(:pharmacy_id, references(:pharmacies))
       add(:courier_id, references(:couriers))
       add(:delivered, :boolean, default: false)
+      add(:undeliverable, :boolean, default: false)
+      add(:active, :boolean, default: true)
       timestamps()
     end
   end

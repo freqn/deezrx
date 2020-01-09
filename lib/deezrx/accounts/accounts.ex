@@ -7,7 +7,8 @@ defmodule Deezrx.Accounts do
     Courier,
     Pharmacy,
     Order,
-    User
+    User,
+    PharmacyCourier
   }
 
   def list_couriers do
@@ -46,6 +47,10 @@ defmodule Deezrx.Accounts do
 
   def get_pharmacy!(id), do: Repo.get!(Pharmacy, id)
 
+  def get_pharm_courier!(id) do
+    Repo.get_by!(PharmacyCourier, pharmacy_id: id).courier_id
+  end
+
   def create_pharmacy(attrs \\ %{}) do
     %Pharmacy{}
     |> Pharmacy.changeset(attrs)
@@ -73,11 +78,23 @@ defmodule Deezrx.Accounts do
   end
 
   def list_orders_by_pharmacy(id) do
-    from(o in Order, where: o.pharmacy_id == ^id, select: o) |> Repo.all()
+    from(o in Order,
+      order_by: o.pickup_time,
+      where: o.pharmacy_id == ^id,
+      where: o.active == true,
+      select: o
+    )
+    |> Repo.all()
   end
 
   def list_orders_by_courier(id) do
-    from(o in Order, where: o.courier_id == ^id, select: o) |> Repo.all()
+    from(o in Order,
+      where: o.courier_id == ^id,
+      where: o.delivered == false,
+      where: o.active == true,
+      select: o
+    )
+    |> Repo.all()
   end
 
   def get_order!(id), do: Repo.get!(Order, id)
