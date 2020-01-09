@@ -14,26 +14,27 @@ Please [check the deployment guides](http://www.phoenixframework.org/docs/deploy
 
 ## Test Users:
 
-Default demo password for all users: password123
-
-Login email addresses for Pharmacy & Courier demo accounts:
+  - Default demo password for all users: password123
 
 **Pharmacy Access:**
 
-  BetterRx: betterrx@test.com
+  - betterrx@test.com
 
-  BestrRx: bestrx@test.com
+  - bestrx@test.com
 
-  Drugs R Us: drugsrus@test.com
+  - drugsrus@test.com
 
 **Courier Access:**
 
-  Same Day Delivery: sameday@test.com
+  - sameday@test.com
 
-  Previous Day Delivery: previousday@test.com
+  - previousday@test.com
 
-**Admin Access:** - admin@test.com
+**Admin Access:** 
 
+  - admin@test.com
+
+<hr>
 
 ## Answers to Project Questions:
 
@@ -66,7 +67,7 @@ I'll answer this with a list:
 
 Don't hesitate to contact me with additional questions.
 
-Thank you!
+Thank you
 
 
 
