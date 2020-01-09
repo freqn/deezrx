@@ -62,7 +62,7 @@ I'll answer this with a list:
 
 1) Add bonus points for live notifications or any live-view things (chat, etc.) :)
    
-2) Add more time for those of use who are newer to Elixir and Phoenix :)
+2) Add more time for those of use who are newer to Elixir and Phoenix. I wanted to be much more thorough with certain aspects of this project :)
 
 
 Don't hesitate to contact me with additional questions.
