@@ -6,7 +6,7 @@ To start Deezrx:
 
   1) Install dependencies with `mix deps.get`
   2) Fetch Node.js dependencies with `cd assets && npm install`
-  3) Generate the database with `mix ecto.create && mix ecto.migrate && mix run priv/repo/seeds.exs`
+  3) Generate the database and seed data with `mix ecto.create && mix ecto.migrate && mix run priv/repo/seeds.exs`
   4) Start Phoenix endpoint with `mix phx.server`, or with `iex -S mix phx.server` for debugging
   5) Visit [`localhost:4000`](http://localhost:4000) from your browser
 
