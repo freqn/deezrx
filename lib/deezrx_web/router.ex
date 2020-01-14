@@ -19,7 +19,6 @@ defmodule DeezrxWeb.Router do
     pipe_through(:browser)
 
     get("/", OrderController, :index)
-    get("/sessions", SessionController, :delete)
     get("/orders/:id/deliver_order", OrderController, :deliver)
     put("/orders/:id/deliver_order", OrderController, :deliver)
     get("/orders/:id/cancel_order", OrderController, :cancel)
@@ -27,11 +26,6 @@ defmodule DeezrxWeb.Router do
     get("/orders/:id/mark_undeliverable", OrderController, :mark_undeliverable)
     put("/orders/:id/mark_undeliverable", OrderController, :mark_undeliverable)
     resources("/orders", OrderController)
-    resources("/sessions", SessionController, only: [:new, :create], singleton: true)
+    resources("/sessions", SessionController, only: [:new, :create, :delete], singleton: true)
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", DeezrxWeb do
-  #   pipe_through :api
-  # end
 end

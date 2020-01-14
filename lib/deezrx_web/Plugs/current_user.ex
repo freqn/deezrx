@@ -42,7 +42,6 @@ defmodule DeezrxWeb.Plugs.CurrentUser do
 
   def is_courier?(%Plug.Conn{} = conn) do
     user = get(conn)
-    IO.inspect(user)
     is_courier?(user)
   end
 
