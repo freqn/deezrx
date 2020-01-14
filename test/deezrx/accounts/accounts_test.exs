@@ -14,6 +14,11 @@ defmodule Deezrx.AccountsTest do
     password: "123456"
   }
 
+  @courier_attrs %{
+    name: "test courier",
+    address: "1 main st, columbus"
+  }
+
   @order_attrs %{
     patient_first_name: "Jerry",
     patient_last_name: "Hangover",
@@ -32,6 +37,15 @@ defmodule Deezrx.AccountsTest do
       |> Accounts.create_user()
 
     user
+  end
+
+  def courier_fixture(attrs \\ %{}) do
+    {:ok, courier} =
+      attrs
+      |> Enum.into(@courier_attrs)
+      |> Accounts.create_courier()
+
+    courier
   end
 
   def pharmacy_fixture(attrs \\ %{}) do
@@ -142,9 +156,15 @@ defmodule Deezrx.AccountsTest do
 
     test "get_order!/1 fetches an order" do
       order = order_fixture()
-      fetched_order = Accounts.get_order!(order.id)
+      courier = courier_fixture()
+      {:ok, courier_order} = Accounts.update_order(order, %{courier_id: courier.id})
 
-      assert fetched_order.id == order.id
+      IO.inspect(courier_order)
+
+      fetched_order = Accounts.get_order!(courier_order.id)
+
+      assert fetched_order.id == courier_order.id
+      assert fetched_order.courier.name == courier.name
     end
 
     test "cancels an order" do
@@ -165,6 +185,7 @@ defmodule Deezrx.AccountsTest do
 
     test "marks an order as undeliverable" do
       order = order_fixture()
+
       new_attrs = %{undeliverable: true}
 
       assert {:ok, order} = Accounts.update_order(order, new_attrs)

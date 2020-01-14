@@ -27,6 +27,9 @@
     <b>Pharmacy</b>: <%= @order.pharmacy_name %>
   </p>
   <p>
+    <b>Courier</b>: <%= @order.courier.name %>
+  </p>
+  <p>
     <b>Undeliverable</b>: <%= @order.undeliverable %>
   </p>
   <p>

@@ -109,7 +109,11 @@ defmodule Deezrx.Accounts do
     |> Repo.all()
   end
 
-  def get_order!(id), do: Repo.get!(Order, id)
+  def get_order!(id) do
+    Order
+    |> Repo.get!(id)
+    |> Repo.preload(:courier)
+  end
 
   def create_order(attrs \\ %{}) do
     %Order{}

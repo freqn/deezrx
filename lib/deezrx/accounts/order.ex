@@ -1,7 +1,7 @@
 defmodule Deezrx.Accounts.Order do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Deezr.Accounts
+  alias Deezrx.Accounts
 
   schema "orders" do
     field(:patient_first_name, :string)
